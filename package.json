@@ -1,0 +1,21 @@
+{
+  "name": "e-commerce-end2end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "dev": "npx cypress open",
+    "ci:start-server": "http-server --path ./dist/blog -p 3000",
+    "cy:run": "cypress run --headless --browser chrome",
+    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:3000 cy:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^1.14.0"
+  }
+}

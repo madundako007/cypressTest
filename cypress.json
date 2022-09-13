@@ -1,0 +1,7 @@
+{ "chromeWebSecurity": false,
+    "baseUrl": "https://staging.tmart.com.ng/",
+    "watchForFileChanges": false,
+    "pageLoadTimeout": 60000,
+    "defaultCommandTimeout": 60000,
+    "video": false
+}
