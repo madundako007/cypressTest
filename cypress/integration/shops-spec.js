@@ -1,18 +1,11 @@
 /// <reference types="Cypress" />
 
-// const { first } = require("cypress/types/lodash")
-
-
 it('it should be able to see all shops ', () => {
  
   cy.login('mohammed@mailinator.com', 'mb02mn03')
 
   //home page
   cy.get('.sc-jcwpoC').click().wait(2000)
-  // cy.get('div > span > .sc-jcwpoC kyvWZW').click().wait(2000)
-  // cy.contains('Recover Password').should('exist')
-  // cy.contains('button', 'Login').should('exist').click()
-  // cy.contains('My Account').should('exist').wait(3000)
 
   //HOME PAGE TESTING
   cy.contains('All Categories').should('exist')
@@ -42,10 +35,6 @@ it('it should be able to see all shops ', () => {
   cy.contains('MAKE MONEY ON TIMART').should('exist')
   cy.contains('DOWNLOAD APP & CONNECT WITH US').should('exist')
 
-
-  // cy.login('mohammed@mailinator.com', 'mb02mn03').wait(6000)
-  // cy.contains('Login/Create Account').should('exist').click().wait(3000)
-
   cy.contains('Shops').should('exist').click({ force: true })
   cy.contains('Yes, allow location').should('exist').click()
   cy.wait(3000)
@@ -70,17 +59,15 @@ it('it should be able to see all shops ', () => {
   //Need to fix this, use name instead of class
   cy.contains('Coke').should('exist').click({ force: true }).wait(7000)
 
-  // cy.contains('Testing001').should('exist').click({ force: true }).wait(7000)
-
   //Add to cart
-  cy.get(' #add-to-cart').contains('Add To Cart').click({ force: true }).wait(4000)
+  cy.get(' #add-to-cart', { timeout: 4000 }).contains('Add To Cart').click({ force: true })
 
   cy.contains('Descriptions').should('exist')
   cy.contains('Specifications').should('exist')
   cy.contains('Customer Reviews').should('exist')
 
   //Cart
-  cy.get('.sc-iBzEeX').click().wait(4000)
+  cy.get('.sc-iBzEeX', { timeout: 4000 }).click()
 
   cy.contains('Order Summary').should('exist')
   cy.contains('Sub Total').should('exist')
@@ -106,14 +93,15 @@ it('it should be able to see all shops ', () => {
   //Show paystack payment method
   cy.contains('Continue to Payment').should('exist').click().wait(8000)
 
-  cy.get('.cards > card').should('exist').click({force: true})
+  // cy.get('.cards > card').should('exist').click({force: true})
+  cy.get('div > .cards > .card').should('be.visible').click({force: true})
   // cy.contains('.cards > .card').parent('div').find('.card__details').check()
 
   //home page
-  cy.get('div > span > .sc-iTVJFM').click().wait(2000)
-  cy.contains('Shops').should('exist').click().wait(4000)
+  cy.get('div > span > .sc-iTVJFM', { timeout: 3000 }).click()
+  cy.contains('Shops').should('exist').click()
 
-  cy.get(':nth-child(3) > svg').click().wait(3000)
+  cy.get(':nth-child(3) > svg', { timeout: 3000 }).click()
 
   //Cart
   // cy.get('.sc-ciZhAO').click().wait(2000)
