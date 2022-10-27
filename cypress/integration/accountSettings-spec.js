@@ -20,5 +20,6 @@ describe('account Settings', () => {
 
         //HOME PAGE 
         cy.get('nav > div > a > img', {timeout: 3000}).click()
+        // cy.get('.sc-jcwpoC kyvWZW', {timeout: 3000}).click()
     })
 })

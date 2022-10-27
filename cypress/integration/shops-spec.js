@@ -1,7 +1,9 @@
 /// <reference types="Cypress" />
 
+// const { should } = require("chai")
+
 it('it should be able to see all shops ', () => {
- 
+
   cy.login('mohammed@mailinator.com', 'mb02mn03')
 
   //home page
@@ -52,9 +54,9 @@ it('it should be able to see all shops ', () => {
   cy.get('.input-field').type('Great Star{Enter}').wait(4000)
 
   cy.contains('Great Star').should('exist').click(3000)
-  
+
   cy.scrollTo(5, 3000, { delay: 100 }).wait(2000)
-  
+
   //TODO
   //Need to fix this, use name instead of class
   cy.contains('Coke').should('exist').click({ force: true }).wait(7000)
@@ -77,31 +79,72 @@ it('it should be able to see all shops ', () => {
   cy.contains('Shops').should('exist')
   cy.contains('Transaction and delivery fees will be added at checkout').should('exist')
 
+  debugger
   //Buy product in cart
   cy.contains('Buy (').should('exist').click().wait(3000)
 
-  cy.contains('Sub Total').should('exist')
-  cy.contains('Total').should('exist')
-  cy.contains('Pay on Delivery').should('exist')
-  cy.contains('Pay Now').should('exist')
-  cy.contains('Payment Options').should('exist')
+  //verify change address
+  cy.contains('Delivery/Pick up Options').should('exist')
+  cy.contains('Review Order').should('exist')
 
-  // pay now
-  cy.contains('Pay Now').should('exist').click()
+  //On change address page
+  cy.get('#change-address-btn').should('exist').click().wait(4000)
 
-  //Continue to Payment
-  //Show paystack payment method
-  cy.contains('Continue to Payment').should('exist').click().wait(8000)
+  cy.contains('Address Book').should('exist')
+  cy.contains('Select from existing adress or add new address').should('exist')
 
-  // cy.get('.cards > card').should('exist').click({force: true})
-  cy.get('div > .cards > .card').should('be.visible').click({force: true})
-  // cy.contains('.cards > .card').parent('div').find('.card__details').check()
+  //Add new address
+  cy.contains('Add New Address').should('exist').click()
 
-  //home page
-  cy.get('div > span > .sc-iTVJFM', { timeout: 3000 }).click()
-  cy.contains('Shops').should('exist').click()
+  cy.contains('Address Form').should('exist')
+  cy.contains('Fill the form to register a delivery address').should('exist')
 
-  cy.get(':nth-child(3) > svg', { timeout: 3000 }).click()
+
+  cy.contains('Enter Your Street Address').should('exist')
+  cy.get('[name="address"]').type('Tunga')
+  cy.get('[name="mobileNumber"]').type('07065857928')
+
+  // cy.get('.css-19bqh2r')
+
+  // cy.get('.select css-2b097c-container > . css-yk16xz-control').select('Niger').click()
+  // .should('be.visible')
+  // .select('Niger')
+  // .click()
+  // .select('Niger')
+
+  // cy.contains('Select State').select('Niger').click({force: true})
+  // cy.get('.css-1wa3eu0-placeholder').select('Niger', {force: true}).click()
+  // cy.contains('Abia').click()
+
+
+  //select state
+  cy.contains('Select State').click(3000)
+
+  // cy.contains('Sub Total').should('exist')
+  // cy.contains('Total').should('exist')
+  // cy.contains('Pay on Delivery').should('exist')
+  // cy.contains('Pay Now').should('exist')
+  // cy.contains('Payment Options').should('exist')
+
+  // // pay now
+  // cy.contains('Pay Now').should('exist').click()
+
+  // //Continue to Payment
+  // //Show paystack payment method
+  // cy.contains('Continue to Payment').should('exist').click().wait(8000)
+
+  // // cy.contains('.cards ', '.card', '.card__details', '.card__details__select', '.card__number').should('exist').check()
+  // cy.get(' .card-nav').click({ force: true })
+
+  // cy.get(' .cards > .card')
+  //   .contains('Success')
+  //   .click({ force: true })
+
+  // //home page
+  // cy.get('div > span > .sc-iTVJFM', { timeout: 3000 }).click()
+  // cy.contains('Shops').should('exist').click()
+
+  // cy.get(':nth-child(3) > svg', { timeout: 3000 }).click()
 
   //Cart
   // cy.get('.sc-ciZhAO').click().wait(2000)
