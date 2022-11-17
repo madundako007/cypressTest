@@ -3,11 +3,13 @@
 // const { should } = require("chai")
 
 it('it should be able to see all shops ', () => {
-
+  // cy.viewport('samsung-s10')
+  // cy.viewport('1280, 720')
   cy.login('mohammed@mailinator.com', 'mb02mn03')
 
   //home page
-  cy.get('.sc-jcwpoC').click().wait(2000)
+  // cy.get('.sc-iTVJFM oxVOu').click().wait(2000)
+  cy.get('.sc-iTVJFM').click(2000)
 
   //HOME PAGE TESTING
   cy.contains('All Categories').should('exist')
@@ -26,7 +28,7 @@ it('it should be able to see all shops ', () => {
 
   cy.contains('Products from popular Stores').should('exist')
 
-  cy.scrollTo(5, 3000, { delay: 100 }).wait(2000)
+  cy.scrollTo(5, 1000, { delay: 100 }).wait(2000)
 
   cy.contains('Products you may like').should('exist')
   cy.contains('Stores on Timart').should('exist')
@@ -39,37 +41,45 @@ it('it should be able to see all shops ', () => {
 
   cy.contains('Shops').should('exist').click({ force: true })
   cy.contains('Yes, allow location').should('exist').click()
-  cy.wait(3000)
+  cy.wait(7000)
 
-
-  //next page
-  cy.get(':nth-child(3) > .sc-EZqKI > svg').click().wait(5000)
+  // //TODO
+  // //next page
+  cy.contains('Next').should('exist').click()
+  cy.wait(2000)
   cy.url().should('eq', 'https://staging.tmart.com.ng/merchant/2')
 
-  //back 
-  cy.get(':nth-child(1) > .sc-EZqKI > svg').click().wait(5000)
+  // //back 
+  cy.contains('Previous').should('exist').click()
   cy.url().should('eq', 'https://staging.tmart.com.ng/merchant/1')
 
   //SEARCH
-  cy.get('.input-field').type('Great Star{Enter}').wait(4000)
+  cy.get('.input-field').type('keyy').wait(4000).click()
 
-  cy.contains('Great Star').should('exist').click(3000)
+  cy.contains('keyy').should('exist').click(4000)
 
-  cy.scrollTo(5, 3000, { delay: 100 }).wait(2000)
+  cy.scrollTo(0, 0, { delay: 100 }).wait(2000)
 
-  //TODO
-  //Need to fix this, use name instead of class
-  cy.contains('Coke').should('exist').click({ force: true }).wait(7000)
-
-  //Add to cart
-  cy.get(' #add-to-cart', { timeout: 4000 }).contains('Add To Cart').click({ force: true })
+  //Adding product 
+  //variation product
+  cy.contains('Khadi').should('exist').click({ force: true }).wait(5000)
 
   cy.contains('Descriptions').should('exist')
   cy.contains('Specifications').should('exist')
   cy.contains('Customer Reviews').should('exist')
 
+  cy.scrollTo(0, 500, { delay: 100 }).wait(2000)
+  cy.contains('Red/Big').should('exist').click()
+
+  //click add to cart
+  cy.get(':nth-child(1) > .sc-dIsUp > .sc-GvhzO > :nth-child(3)').click().wait(1000)
+
+  //Add to cart
+  cy.scrollTo(0, 0, { delay: 100 })
+  cy.get('.sc-efHYUO').click().wait(2000)
+
   //Cart
-  cy.get('.sc-iBzEeX', { timeout: 4000 }).click()
+  // cy.get('.sc-iBzEeX', { timeout: 4000 }).click()
 
   cy.contains('Order Summary').should('exist')
   cy.contains('Sub Total').should('exist')
@@ -79,7 +89,6 @@ it('it should be able to see all shops ', () => {
   cy.contains('Shops').should('exist')
   cy.contains('Transaction and delivery fees will be added at checkout').should('exist')
 
-  debugger
   //Buy product in cart
   cy.contains('Buy (').should('exist').click().wait(3000)
 
@@ -87,38 +96,28 @@ it('it should be able to see all shops ', () => {
   cy.contains('Delivery/Pick up Options').should('exist')
   cy.contains('Review Order').should('exist')
 
-  //On change address page
-  cy.get('#change-address-btn').should('exist').click().wait(4000)
-
-  cy.contains('Address Book').should('exist')
-  cy.contains('Select from existing adress or add new address').should('exist')
-
-  //Add new address
-  cy.contains('Add New Address').should('exist').click()
-
-  cy.contains('Address Form').should('exist')
-  cy.contains('Fill the form to register a delivery address').should('exist')
-
+  //Add new address 
+  cy.contains('Enter Your Full Name').should('exist')
 
   cy.contains('Enter Your Street Address').should('exist')
-  cy.get('[name="address"]').type('Tunga')
-  cy.get('[name="mobileNumber"]').type('07065857928')
+  cy.get(':nth-child(1) > .select > .css-yk16xz-control > .css-1hwfws3').should('exist').click().wait(1000)
+  cy.contains('Niger').click()
 
-  // cy.get('.css-19bqh2r')
+  cy.get(':nth-child(2) > .select > .css-yk16xz-control > .css-1hwfws3').should('exist').click().wait(1000)
+  cy.contains('Minna-Tunga').click()
 
-  // cy.get('.select css-2b097c-container > . css-yk16xz-control').select('Niger').click()
-  // .should('be.visible')
-  // .select('Niger')
-  // .click()
-  // .select('Niger')
+  cy.get('[name="address"]').type('behind abdulsalam garage')
 
-  // cy.contains('Select State').select('Niger').click({force: true})
-  // cy.get('.css-1wa3eu0-placeholder').select('Niger', {force: true}).click()
-  // cy.contains('Abia').click()
+  cy.contains('Save').should('exist').click()
+
+  cy.contains('Pay Now').should('exist').click()
 
 
-  //select state
-  cy.contains('Select State').click(3000)
+  // cy.get('.select css-2b097c-container').select('Niger').click()
+  // cy.get(':nth-child(1) > .select > .css-yk16xz-control > .css-1hwfws3').should('be.visible').click().wait(1000)
+  // cy.get(':nth-child(1) > .select > .css-yk16xz-control > .css-1hwfws3').select(2).contains('Niger').wait(1000)
+  // cy.get('#id="react-select-3-option-26"').select('Niger').click()
+
 
   // cy.contains('Sub Total').should('exist')
   // cy.contains('Total').should('exist')
